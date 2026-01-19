@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
-import { Sun, Moon, Network, BookOpen, Play, Menu, X } from 'lucide-react';
+import { Sun, Moon, Network, Menu, X } from 'lucide-react';
 import { clsx } from 'clsx';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -11,9 +11,9 @@ const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    { label: 'Home', path: '/', icon: Network },
-    { label: 'Learn', path: '/learn', icon: BookOpen },
-    { label: 'Playground', path: '/playground', icon: Play },
+    { label: 'Home', path: '/' },
+    { label: 'Learn', path: '/learn' },
+    { label: 'Playground', path: '/playground' },
   ];
 
   return (
@@ -34,20 +34,18 @@ const Navbar: React.FC = () => {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-2">
             {navItems.map((item) => {
-              const Icon = item.icon;
               const isActive = location.pathname === item.path;
               return (
                 <Link
                   key={item.path}
                   to={item.path}
                   className={clsx(
-                    'px-2.5 py-1.5 rounded-lg text-[11px] font-black uppercase tracking-widest transition-all flex items-center space-x-1.5',
+                    'px-2.5 py-1.5 rounded-lg text-[11px] font-black uppercase tracking-widest transition-all flex items-center',
                     isActive
                       ? 'bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400'
                       : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
                   )}
                 >
-                  <Icon className="w-3.5 h-3.5" />
                   <span>{item.label}</span>
                 </Link>
               );
@@ -93,7 +91,6 @@ const Navbar: React.FC = () => {
           >
             <div className="px-4 py-6 space-y-4">
               {navItems.map((item) => {
-                const Icon = item.icon;
                 const isActive = location.pathname === item.path;
                 return (
                   <Link
@@ -101,13 +98,12 @@ const Navbar: React.FC = () => {
                     to={item.path}
                     onClick={() => setIsMenuOpen(false)}
                     className={clsx(
-                      'flex items-center space-x-4 p-4 rounded-2xl text-lg font-bold transition-all',
+                      'flex items-center p-4 rounded-2xl text-lg font-bold transition-all',
                       isActive
                         ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20'
                         : 'text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-900'
                     )}
                   >
-                    <Icon className="w-6 h-6" />
                     <span>{item.label}</span>
                   </Link>
                 );
