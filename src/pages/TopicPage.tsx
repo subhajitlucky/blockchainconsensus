@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, BookOpen, Lightbulb, Target } from 'lucide-react';
+import { ArrowLeft, BookOpen, Lightbulb, Target, ChevronLeft, ChevronRight } from 'lucide-react';
 import { topicContent } from '../data/content';
 import MiningViz from '../components/visualizations/MiningViz';
 import ConsensusIntroViz from '../components/visualizations/ConsensusIntroViz';
@@ -11,6 +11,15 @@ import FinalityViz from '../components/visualizations/FinalityViz';
 const TopicPage: React.FC = () => {
   const { topicId } = useParams();
   const content = topicId ? topicContent[topicId] : null;
+
+  const topicKeys = Object.keys(topicContent);
+  const currentIndex = topicId ? topicKeys.indexOf(topicId) : -1;
+  
+  const prevTopicId = currentIndex > 0 ? topicKeys[currentIndex - 1] : null;
+  const nextTopicId = currentIndex !== -1 && currentIndex < topicKeys.length - 1 ? topicKeys[currentIndex + 1] : null;
+  
+  const prevTopic = prevTopicId ? topicContent[prevTopicId] : null;
+  const nextTopic = nextTopicId ? topicContent[nextTopicId] : null;
 
   const renderVisualization = () => {
     switch (topicId) {
@@ -100,6 +109,39 @@ const TopicPage: React.FC = () => {
               {content.deepDive}
             </div>
           </section>
+        </div>
+
+        {/* Navigation Buttons */}
+        <div className="flex justify-between items-center pt-8 border-t border-gray-200 dark:border-gray-800">
+          {prevTopic ? (
+            <Link
+              to={`/learn/${prevTopic.id}`}
+              className="flex items-center gap-3 p-4 rounded-xl border border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-slate-800 transition-all group w-full md:w-auto md:pr-8"
+            >
+              <ChevronLeft className="w-5 h-5 text-gray-400 group-hover:text-blue-500 transition-colors" />
+              <div className="text-left">
+                <div className="text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wider">Previous</div>
+                <div className="font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{prevTopic.title}</div>
+              </div>
+            </Link>
+          ) : (
+            <div /> 
+          )}
+
+          {nextTopic ? (
+            <Link
+              to={`/learn/${nextTopic.id}`}
+              className="flex items-center gap-3 p-4 rounded-xl border border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-slate-800 transition-all group w-full md:w-auto md:pl-8 justify-end md:justify-start"
+            >
+              <div className="text-right">
+                <div className="text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wider">Next</div>
+                <div className="font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{nextTopic.title}</div>
+              </div>
+              <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-500 transition-colors" />
+            </Link>
+          ) : (
+             <div />
+          )}
         </div>
       </div>
     </div>
