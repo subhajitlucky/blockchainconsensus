@@ -29,7 +29,7 @@ const LearningPath: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
             >
-              <Link to={`/topic/${topic.id}`} className="block group">
+              <Link to={`/learn/${topic.id}`} className="block group">
                 <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 hover:border-blue-500 transition-all flex items-center justify-between shadow-sm">
                   <div className="flex items-center gap-4">
                     <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
