@@ -136,35 +136,39 @@ const TopicPage: React.FC = () => {
         </div>
 
         {/* Navigation Buttons */}
-        <div className="flex justify-between items-center pt-8 border-t border-gray-200 dark:border-gray-800">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-12 border-t border-gray-100 dark:border-slate-800">
           {prevTopic ? (
             <Link
               to={`/learn/${prevTopic.id}`}
-              className="flex items-center gap-3 p-4 rounded-xl border border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-slate-800 transition-all group w-full md:w-auto md:pr-8"
+              className="flex items-center gap-4 p-5 rounded-2xl border border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900/50 hover:border-blue-500/50 hover:bg-blue-50/30 dark:hover:bg-blue-900/10 transition-all group"
             >
-              <ChevronLeft className="w-5 h-5 text-gray-400 group-hover:text-blue-500 transition-colors" />
-              <div className="text-left">
-                <div className="text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wider">Previous</div>
-                <div className="font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{prevTopic.title}</div>
+              <div className="w-10 h-10 rounded-full bg-gray-50 dark:bg-slate-800 flex items-center justify-center text-gray-400 group-hover:bg-blue-500 group-hover:text-white transition-colors">
+                <ChevronLeft size={20} />
+              </div>
+              <div className="flex-1 min-w-0 text-left">
+                <div className="text-[10px] text-gray-400 dark:text-slate-500 font-black uppercase tracking-widest mb-0.5">Previous</div>
+                <div className="font-bold text-gray-900 dark:text-white truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors text-sm sm:text-base">{prevTopic.title}</div>
               </div>
             </Link>
           ) : (
-            <div /> 
+            <div className="hidden sm:block" />
           )}
 
           {nextTopic ? (
             <Link
               to={`/learn/${nextTopic.id}`}
-              className="flex items-center gap-3 p-4 rounded-xl border border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-slate-800 transition-all group w-full md:w-auto md:pl-8 justify-end md:justify-start"
+              className="flex items-center justify-between gap-4 p-5 rounded-2xl border border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900/50 hover:border-blue-500/50 hover:bg-blue-50/30 dark:hover:bg-blue-900/10 transition-all group text-right"
             >
-              <div className="text-right">
-                <div className="text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wider">Next</div>
-                <div className="font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{nextTopic.title}</div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[10px] text-gray-400 dark:text-slate-500 font-black uppercase tracking-widest mb-0.5">Next</div>
+                <div className="font-bold text-gray-900 dark:text-white truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors text-sm sm:text-base">{nextTopic.title}</div>
               </div>
-              <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-500 transition-colors" />
+              <div className="w-10 h-10 rounded-full bg-gray-50 dark:bg-slate-800 flex items-center justify-center text-gray-400 group-hover:bg-blue-500 group-hover:text-white transition-colors">
+                <ChevronRight size={20} />
+              </div>
             </Link>
           ) : (
-             <div />
+             <div className="hidden sm:block" />
           )}
         </div>
       </div>

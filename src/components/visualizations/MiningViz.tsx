@@ -247,7 +247,6 @@ const MiningViz: React.FC = () => {
           onClick={() => {
             if (isMining) setIsMining(false);
             else { setIsMining(true); if (!startTime) {
-              // eslint-disable-next-line react-hooks/purity
               const now = Date.now();
               setStartTime(now);
             } }
