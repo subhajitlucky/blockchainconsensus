@@ -175,6 +175,7 @@ const FinalityViz: React.FC = () => {
               </div>
               <div className="h-1.5 w-full bg-gray-200 dark:bg-slate-800 rounded-full overflow-hidden transition-colors">
                  <motion.div 
+                   initial={{ width: 0 }}
                    animate={{ width: `${Math.max(0, 100 - safetyLevel)}%` }}
                    className="h-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.5)]"
                  />
@@ -191,6 +192,7 @@ const FinalityViz: React.FC = () => {
               </div>
               <div className="h-1.5 w-full bg-gray-200 dark:bg-slate-800 rounded-full overflow-hidden transition-colors">
                  <motion.div 
+                   initial={{ width: 0 }}
                    animate={{ width: `${safetyLevel}%` }}
                    className="h-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"
                  />

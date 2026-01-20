@@ -137,7 +137,7 @@ const LongestChainViz: React.FC = () => {
                        {chainA.map((b, i) => (
                          <motion.div
                            key={b.id}
-                           initial={{ scale: 0, x: -20 }}
+                           initial={{ scale: 0, x: -20, opacity: 0 }}
                            animate={{ 
                              scale: 1, 
                              x: 0,
@@ -183,7 +183,7 @@ const LongestChainViz: React.FC = () => {
                        {chainB.map((b, i) => (
                          <motion.div
                            key={b.id}
-                           initial={{ scale: 0, x: -20 }}
+                           initial={{ scale: 0, x: -20, opacity: 0 }}
                            animate={{ 
                              scale: 1, 
                              x: 0,

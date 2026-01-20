@@ -73,6 +73,7 @@ const DifficultyAdjustmentViz: React.FC = () => {
 
            {/* The Target "Probability" Box */}
            <motion.div
+             initial={{ width: '50%', height: '50%' }}
              animate={{
                width: `${targetSize}%`,
                height: `${targetSize}%`,

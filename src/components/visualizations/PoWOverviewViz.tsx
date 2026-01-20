@@ -80,17 +80,20 @@ const PoWOverviewViz: React.FC = () => {
           <div className="relative w-48 h-48 flex items-center justify-center">
             {/* Concentric Rotating Rings */}
             <motion.div 
+              initial={{ rotate: 0 }}
               animate={{ rotate: 360 }}
               transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
               className="absolute inset-0 border border-gray-100 dark:border-slate-800 rounded-full"
             />
             <motion.div 
+              initial={{ rotate: 0 }}
               animate={{ rotate: -360 }}
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               className="absolute inset-4 border border-blue-500/5 rounded-full"
             />
             <motion.div 
-              animate={status === 'mining' ? { rotate: 360, scale: [1, 1.05, 1] } : {}}
+              initial={{ rotate: 0, scale: 1 }}
+              animate={status === 'mining' ? { rotate: 360, scale: [1, 1.05, 1] } : { rotate: 0, scale: 1 }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               className={`absolute inset-8 border-2 rounded-full flex items-center justify-center transition-colors duration-700 ${
                 status === 'success' ? 'border-emerald-500/40' : status === 'mining' ? 'border-blue-500/40' : 'border-gray-100 dark:border-slate-800'
@@ -152,6 +155,7 @@ const PoWOverviewViz: React.FC = () => {
             </div>
             <div className="h-1.5 w-full bg-gray-100 dark:bg-slate-900 rounded-full overflow-hidden border border-gray-200 dark:border-slate-800 p-[1px]">
               <motion.div 
+                initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
                 className={`h-full rounded-full transition-colors duration-500 ${status === 'success' ? 'bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]' : 'bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]'}`} 
               />
@@ -170,6 +174,7 @@ const PoWOverviewViz: React.FC = () => {
              {[1, 2, 3, 4].map(i => (
                <motion.div 
                  key={i}
+                 initial={{ borderColor: '#e2e8f0', backgroundColor: '#f8fafc' }}
                  animate={status === 'success' ? { 
                    borderColor: ['#e2e8f0', '#10b981', '#e2e8f0'],
                    backgroundColor: ['#f8fafc', 'rgba(16,185,129,0.05)', '#f8fafc']

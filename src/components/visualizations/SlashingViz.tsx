@@ -124,12 +124,12 @@ const SlashingViz: React.FC = () => {
               <AnimatePresence mode="wait">
                  <motion.div
                    key={status}
-                   initial={{ scale: 0.8, opacity: 0 }}
+                   initial={{ scale: 0.8, opacity: 0, rotate: 0 }}
                    animate={status === 'slashing' ? { 
                      scale: [1, 1.1, 0.95, 1.05, 1],
                      rotate: [0, -2, 2, -2, 0],
                      opacity: 1
-                   } : { scale: 1, opacity: 1 }}
+                   } : { scale: 1, opacity: 1, rotate: 0 }}
                    transition={status === 'slashing' ? { duration: 0.2, repeat: Infinity } : { type: 'spring' }}
                    className={clsx(
                      "relative z-20 w-32 h-32 rounded-[2.5rem] border-2 flex flex-col items-center justify-center gap-3 shadow-2xl transition-all duration-700",

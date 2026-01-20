@@ -132,9 +132,10 @@ const PoSViz: React.FC = () => {
             <motion.div
               key={v.id}
               layout
+              initial={{ scale: 1, borderColor: 'rgba(0,0,0,0)' }}
               animate={{ 
                 scale: v.status === 'selected' ? 1.02 : 1,
-                borderColor: v.status === 'selected' ? '#6366f1' : v.status === 'slashed' ? '#ef4444' : 'transparent'
+                borderColor: v.status === 'selected' ? '#6366f1' : v.status === 'slashed' ? '#ef4444' : 'rgba(0,0,0,0)'
               }}
               className={clsx(
                 "relative p-4 border-2 rounded-2xl transition-all duration-500 overflow-hidden group",
@@ -226,8 +227,8 @@ const PoSViz: React.FC = () => {
               {blocks.map((b) => (
                 <motion.div
                   key={b.id}
-                  initial={{ scale: 0, x: 20 }}
-                  animate={{ scale: 1, x: 0 }}
+                  initial={{ scale: 0, x: 20, opacity: 0 }}
+                  animate={{ scale: 1, x: 0, opacity: 1 }}
                   className="flex-shrink-0 w-12 h-12 bg-white dark:bg-slate-900 border-2 border-indigo-500/20 dark:border-indigo-500/40 rounded-xl flex flex-col items-center justify-center gap-0.5 shadow-sm"
                 >
                   <span className="text-[7px] font-black text-gray-400 dark:text-slate-600">#{b.id}</span>

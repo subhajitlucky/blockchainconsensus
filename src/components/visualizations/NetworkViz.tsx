@@ -104,6 +104,7 @@ const NetworkViz: React.FC<NetworkVizProps> = ({ nodes, messages }) => {
             style={{ left: pos.x, top: pos.y }}
           >
             <motion.div
+              initial={{ scale: 1, borderColor: '#3b82f6' }}
               animate={{ 
                 scale: node.isMining ? [1, 1.1, 1] : 1,
                 borderColor: node.isMining ? '#f59e0b' : '#3b82f6'

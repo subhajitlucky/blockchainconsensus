@@ -135,7 +135,7 @@ const ConsensusComparisonViz: React.FC = () => {
                       <div className="text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-tighter">{m.pow.value}</div>
                       <div className="h-1 w-full bg-gray-200 dark:bg-slate-800 rounded-full overflow-hidden transition-colors">
                         <motion.div 
-                          initial={false}
+                          initial={{ width: 0 }}
                           animate={{ width: `${m.pow.score * 10}%` }}
                           className="h-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]"
                         />
@@ -147,7 +147,7 @@ const ConsensusComparisonViz: React.FC = () => {
                       <div className="text-[10px] font-black text-indigo-600 dark:text-indigo-400 uppercase tracking-tighter">{m.pos.value}</div>
                       <div className="h-1 w-full bg-gray-200 dark:bg-slate-800 rounded-full overflow-hidden transition-colors">
                         <motion.div 
-                          initial={false}
+                          initial={{ width: 0 }}
                           animate={{ width: `${m.pos.score * 10}%` }}
                           className="h-full bg-indigo-500 shadow-[0_0_8px_rgba(99,102,241,0.5)]"
                         />

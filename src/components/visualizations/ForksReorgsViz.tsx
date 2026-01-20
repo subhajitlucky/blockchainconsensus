@@ -107,7 +107,7 @@ const ForksReorgsViz: React.FC = () => {
 
               {/* Chain A (Potential Orphans) */}
               {stage >= 1 && blocks.chainA.map((b) => (
-                <motion.g key={b.id} initial={{ scale: 0 }} animate={{ scale: 1, opacity: stage === 2 ? 0.2 : 1 }}>
+                <motion.g key={b.id} initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: stage === 2 ? 0.2 : 1 }}>
                   <rect x={b.x - 25} y={b.y - 25} width="50" height="50" rx="12" className={clsx(
                     "fill-white dark:fill-slate-900 transition-colors duration-500",
                     stage === 2 ? "stroke-red-500/20" : "stroke-blue-500/30"
@@ -123,7 +123,7 @@ const ForksReorgsViz: React.FC = () => {
               {stage >= 1 && blocks.chainB.map((b, i) => (
                 <motion.g 
                   key={b.id} 
-                  initial={{ scale: 0 }} 
+                  initial={{ scale: 0, opacity: 0 }} 
                   animate={{ 
                     scale: (b.id === '104B' && stage < 2) ? 0 : 1,
                     opacity: (b.id === '104B' && stage < 2) ? 0 : 1

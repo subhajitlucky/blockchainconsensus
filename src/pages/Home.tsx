@@ -116,6 +116,7 @@ const Home: React.FC = () => {
                   <div className="flex items-center justify-center flex-1">
                      <div className="relative w-32 h-32">
                         <motion.div 
+                          initial={{ rotate: 0 }}
                           animate={{ rotate: 360 }}
                           transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
                           className="absolute inset-0 border-2 border-dashed border-blue-500/20 rounded-full"
