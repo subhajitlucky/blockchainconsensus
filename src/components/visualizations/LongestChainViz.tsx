@@ -20,7 +20,11 @@ const LongestChainViz: React.FC = () => {
 
   useEffect(() => {
     if (scrollRef.current) {
-      scrollRef.current.scrollLeft = scrollRef.current.scrollWidth;
+      const el = scrollRef.current;
+      const rafHandle = requestAnimationFrame(() => {
+        el.scrollLeft = el.scrollWidth;
+      });
+      return () => cancelAnimationFrame(rafHandle);
     }
   }, [blocks]);
 

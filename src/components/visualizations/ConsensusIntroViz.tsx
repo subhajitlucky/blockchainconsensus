@@ -22,14 +22,21 @@ const ConsensusIntroViz: React.FC = () => {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 480) {
-        setDistance(70); // Bring closer to center on small screens
+        setDistance(80);
       } else {
         setDistance(110);
       }
     };
-    handleResize();
+    
+    const rafHandle = requestAnimationFrame(() => {
+      handleResize();
+    });
+    
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    return () => {
+      cancelAnimationFrame(rafHandle);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   const generals: General[] = [

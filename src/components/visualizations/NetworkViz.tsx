@@ -13,16 +13,25 @@ const NetworkViz: React.FC<NetworkVizProps> = ({ nodes, messages }) => {
 
   useEffect(() => {
     if (!containerRef.current) return;
-    const observer = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        setDimensions({
-          width: entry.contentRect.width,
-          height: entry.contentRect.height,
-        });
-      }
+    const container = containerRef.current;
+    
+    let observer: ResizeObserver;
+    const rafHandle = requestAnimationFrame(() => {
+      observer = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          setDimensions({
+            width: entry.contentRect.width,
+            height: entry.contentRect.height,
+          });
+        }
+      });
+      observer.observe(container);
     });
-    observer.observe(containerRef.current);
-    return () => observer.disconnect();
+
+    return () => {
+      cancelAnimationFrame(rafHandle);
+      if (observer) observer.disconnect();
+    };
   }, []);
 
   const getPos = (index: number, total: number) => {

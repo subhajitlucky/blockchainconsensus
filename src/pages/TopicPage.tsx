@@ -23,7 +23,10 @@ const TopicPage: React.FC = () => {
 
   // Ensure page scrolls to top on topic change
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const scrollHandle = requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+    });
+    return () => cancelAnimationFrame(scrollHandle);
   }, [topicId]);
 
   const topicKeys = Object.keys(topicContent);
