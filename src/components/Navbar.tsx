@@ -32,12 +32,9 @@ const Navbar: React.FC = () => {
                 </div>
                 <div className="absolute -bottom-1 -right-1 w-2.5 h-2.5 bg-emerald-500 border-2 border-white dark:border-slate-950 rounded-full animate-pulse" />
               </div>
-              <div className="flex flex-col">
-                <span className="font-black text-sm tracking-tighter text-gray-900 dark:text-white uppercase leading-none">
-                  Consensus<span className="text-blue-600 dark:text-blue-400">Term</span>
-                </span>
-                <span className="text-[7px] font-black text-gray-500 dark:text-gray-400 uppercase tracking-[0.2em] mt-0.5">v2.0.4 // protocol_lts</span>
-              </div>
+              <span className="font-black text-sm tracking-tighter text-gray-900 dark:text-white uppercase leading-none">
+                Consensus<span className="text-blue-600 dark:text-blue-400">Term</span>
+              </span>
             </Link>
           </div>
 
