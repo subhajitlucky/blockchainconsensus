@@ -7,6 +7,14 @@ import ConsensusIntroViz from '../components/visualizations/ConsensusIntroViz';
 import LongestChainViz from '../components/visualizations/LongestChainViz';
 import PoSViz from '../components/visualizations/PoSViz';
 import FinalityViz from '../components/visualizations/FinalityViz';
+import TrustlessNetworksViz from '../components/visualizations/TrustlessNetworksViz';
+import PoWOverviewViz from '../components/visualizations/PoWOverviewViz';
+import DifficultyAdjustmentViz from '../components/visualizations/DifficultyAdjustmentViz';
+import ForksReorgsViz from '../components/visualizations/ForksReorgsViz';
+import PoSOverviewViz from '../components/visualizations/PoSOverviewViz';
+import BlockProposersViz from '../components/visualizations/BlockProposersViz';
+import SlashingViz from '../components/visualizations/SlashingViz';
+import ConsensusComparisonViz from '../components/visualizations/ConsensusComparisonViz';
 
 const TopicPage: React.FC = () => {
   const { topicId } = useParams();
@@ -25,14 +33,30 @@ const TopicPage: React.FC = () => {
     switch (topicId) {
       case 'why-consensus':
         return <ConsensusIntroViz />;
+      case 'trustless-networks':
+        return <TrustlessNetworksViz />;
+      case 'pow-overview':
+        return <PoWOverviewViz />;
       case 'pow-mining':
         return <MiningViz />;
+      case 'difficulty-adjustment':
+        return <DifficultyAdjustmentViz />;
       case 'longest-chain':
         return <LongestChainViz />;
+      case 'forks-reorgs':
+        return <ForksReorgsViz />;
+      case 'pos-overview':
+        return <PoSOverviewViz />;
       case 'pos-staking':
         return <PoSViz />;
+      case 'block-proposers':
+        return <BlockProposersViz />;
       case 'finality':
         return <FinalityViz />;
+      case 'slashing':
+        return <SlashingViz />;
+      case 'consensus-comparison':
+        return <ConsensusComparisonViz />;
       default:
         return (
           <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-gray-800 p-8 min-h-[400px] flex items-center justify-center">
