@@ -76,17 +76,17 @@ const TopicPage: React.FC = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto py-8 px-4">
-      <Link to="/learn" className="inline-flex items-center text-sm text-gray-500 hover:text-gray-900 dark:hover:text-gray-200 mb-8 transition-colors group">
+    <div className="max-w-4xl mx-auto py-8 px-4 font-mono">
+      <Link to="/learn" className="inline-flex items-center text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200 mb-8 transition-colors group">
         <ArrowLeft className="w-4 h-4 mr-1 group-hover:-translate-x-1 transition-transform" /> Back to Learning Path
       </Link>
       
       <div className="space-y-8">
         <header className="space-y-4">
-          <h1 className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight uppercase">
             {content.title}
           </h1>
-          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 leading-relaxed font-medium">
+          <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 leading-relaxed font-bold uppercase tracking-tight">
             {content.definition}
           </p>
         </header>
@@ -113,12 +113,12 @@ const TopicPage: React.FC = () => {
           <section className="space-y-4">
             <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
               <BookOpen className="w-4 h-4" />
-              <h3 className="font-bold text-base">Key Takeaways</h3>
+              <h3 className="font-bold text-base uppercase tracking-widest">Key Takeaways</h3>
             </div>
             <ul className="space-y-3">
               {content.keyTakeaways.map((item, i) => (
-                <li key={i} className="flex gap-3 text-gray-600 dark:text-gray-400">
-                  <span className="w-6 h-6 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 flex-shrink-0 flex items-center justify-center text-xs font-bold">
+                <li key={i} className="flex gap-3 text-gray-700 dark:text-gray-300 font-bold uppercase text-[11px] tracking-tight">
+                  <span className="w-6 h-6 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 flex-shrink-0 flex items-center justify-center text-xs font-black">
                     {i + 1}
                   </span>
                   {item}
@@ -128,8 +128,8 @@ const TopicPage: React.FC = () => {
           </section>
 
           <section className="space-y-4">
-            <h3 className="font-bold text-lg text-gray-900 dark:text-white">Deep Dive</h3>
-            <div className="prose dark:prose-invert text-gray-600 dark:text-gray-400 whitespace-pre-line text-sm leading-relaxed">
+            <h3 className="font-bold text-lg text-gray-900 dark:text-white uppercase tracking-widest">Deep Dive</h3>
+            <div className="prose dark:prose-invert text-gray-600 dark:text-gray-400 whitespace-pre-line text-[11px] font-bold uppercase leading-relaxed tracking-tight">
               {content.deepDive}
             </div>
           </section>
@@ -146,7 +146,7 @@ const TopicPage: React.FC = () => {
                 <ChevronLeft size={20} />
               </div>
               <div className="flex-1 min-w-0 text-left">
-                <div className="text-[10px] text-gray-400 dark:text-slate-500 font-black uppercase tracking-widest mb-0.5">Previous</div>
+                <div className="text-[10px] text-gray-500 dark:text-gray-400 font-black uppercase tracking-widest mb-0.5">Previous</div>
                 <div className="font-bold text-gray-900 dark:text-white truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors text-sm sm:text-base">{prevTopic.title}</div>
               </div>
             </Link>
@@ -160,7 +160,7 @@ const TopicPage: React.FC = () => {
               className="flex items-center justify-between gap-4 p-5 rounded-2xl border border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900/50 hover:border-blue-500/50 hover:bg-blue-50/30 dark:hover:bg-blue-900/10 transition-all group text-right"
             >
               <div className="flex-1 min-w-0">
-                <div className="text-[10px] text-gray-400 dark:text-slate-500 font-black uppercase tracking-widest mb-0.5">Next</div>
+                <div className="text-[10px] text-gray-500 dark:text-gray-400 font-black uppercase tracking-widest mb-0.5">Next</div>
                 <div className="font-bold text-gray-900 dark:text-white truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors text-sm sm:text-base">{nextTopic.title}</div>
               </div>
               <div className="w-10 h-10 rounded-full bg-gray-50 dark:bg-slate-800 flex items-center justify-center text-gray-400 group-hover:bg-blue-500 group-hover:text-white transition-colors">

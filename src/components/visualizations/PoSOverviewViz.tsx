@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { UserCheck, Vote, CheckCircle2, Wallet, Activity, Database } from 'lucide-react';
+import { UserCheck, Vote, CheckCircle2, Wallet, Activity, Database, Play, Pause } from 'lucide-react';
 import { clsx } from 'clsx';
 
 const PoSOverviewViz: React.FC = () => {
   const [step, setStep] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    if (isPaused) return;
+    
     const timer = setInterval(() => {
       setStep((s) => (s + 1) % 4);
-    }, 4000);
+    }, 5500); // Increased time for better readability
     return () => clearInterval(timer);
-  }, []);
+  }, [isPaused]);
 
   const phases = [
     { 
@@ -21,7 +24,7 @@ const PoSOverviewViz: React.FC = () => {
       color: "blue",
       stat: "32.0 ETH",
       statLabel: "MIN_DEPOSIT",
-      desc: "Validators lock up their coins as a security deposit to join the network. This creates economic 'skin in the game'." 
+      desc: "Validators lock up their coins as a security deposit to join the network. This creates economic 'skin in the game', ensuring they have a financial reason to be honest." 
     },
     { 
       id: 'select',
@@ -30,7 +33,7 @@ const PoSOverviewViz: React.FC = () => {
       color: "indigo",
       stat: "RANDAO",
       statLabel: "SELECTION_SEED",
-      desc: "The protocol randomly picks one validator to propose the next block. Chance is proportional to the amount staked." 
+      desc: "The protocol randomly picks one validator to propose the next block. Selection is pseudo-random but weighted: more stake means a higher chance of being chosen." 
     },
     { 
       id: 'vote',
@@ -39,7 +42,7 @@ const PoSOverviewViz: React.FC = () => {
       color: "purple",
       stat: "Supermajority",
       statLabel: "VOTE_THRESHOLD",
-      desc: "A group of other validators (the committee) checks the block and 'votes' on its validity via attestations." 
+      desc: "A committee of other validators checks the proposed block. They 'attest' (vote) that the data is valid. A 2/3rds supermajority is required for agreement." 
     },
     { 
       id: 'reward',
@@ -48,33 +51,39 @@ const PoSOverviewViz: React.FC = () => {
       color: "emerald",
       stat: "4.8% APR",
       statLabel: "STAKING_YIELD",
-      desc: "Once finalized, the block is permanent. The proposer and voters earn newly issued coins and transaction fees." 
+      desc: "Once enough attestations are collected, the block is 'finalized'. The proposer and voters receive rewards in the form of new coins and transaction fees." 
     }
   ];
 
+  const handlePhaseClick = (index: number) => {
+    setStep(index);
+    setIsPaused(true);
+  };
+
   return (
-    <div className="relative bg-white dark:bg-slate-950 rounded-2xl border border-gray-200 dark:border-slate-800 shadow-xl dark:shadow-2xl overflow-hidden p-4 sm:p-8 font-mono min-h-[550px] flex flex-col justify-between transition-colors text-left text-gray-900 dark:text-white">
+    <div className="relative bg-white dark:bg-slate-950 rounded-2xl border border-gray-200 dark:border-slate-800 shadow-xl dark:shadow-2xl overflow-hidden p-4 sm:p-8 font-mono min-h-[580px] flex flex-col justify-between transition-colors text-left text-gray-900 dark:text-white">
       <div className="absolute inset-0 opacity-[0.03] dark:opacity-10 pointer-events-none" 
            style={{ backgroundImage: 'radial-gradient(#6366f1 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
 
       <div className="relative z-10 space-y-8">
-        {/* HUD Top Stats */}
+        {/* HUD Top Stats - Clickable for manual override */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {phases.map((p, i) => (
-            <div 
+            <button 
               key={p.id}
+              onClick={() => handlePhaseClick(i)}
               className={clsx(
-                "p-3 rounded-xl border transition-all duration-500",
+                "p-3 rounded-xl border transition-all duration-500 text-left outline-none",
                 step === i 
                   ? `bg-gray-50 dark:bg-slate-900 border-indigo-500 dark:border-indigo-500 shadow-sm opacity-100 scale-[1.02]` 
-                  : "bg-gray-50 dark:bg-slate-900/40 border-gray-100 dark:border-slate-800/50 opacity-40 scale-100"
+                  : "bg-gray-50/50 dark:bg-slate-900/40 border-gray-100 dark:border-slate-800/50 opacity-40 scale-100 hover:opacity-60"
               )}
             >
               <div className={clsx("text-[8px] font-black uppercase mb-1", step === i ? `text-indigo-600 dark:text-indigo-400` : "text-gray-400")}>
                 Phase 0{i+1}
               </div>
               <div className="text-[10px] font-bold truncate tracking-tight">{p.title}</div>
-            </div>
+            </button>
           ))}
         </div>
 
@@ -85,7 +94,7 @@ const PoSOverviewViz: React.FC = () => {
               <div className="absolute w-[240px] h-[240px] border border-indigo-500/20 rounded-full" />
               <div className="absolute w-[120px] h-[120px] border border-indigo-500/20 rounded-full" />
               <motion.div 
-                animate={{ rotate: 360 }}
+                animate={isPaused ? {} : { rotate: 360 }}
                 transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
                 className="absolute w-[300px] h-[1px] bg-gradient-to-r from-transparent via-indigo-500 to-transparent" 
               />
@@ -136,7 +145,7 @@ const PoSOverviewViz: React.FC = () => {
                  {[1, 2, 3, 4, 5, 6].map(i => (
                    <motion.div
                      key={i}
-                     animate={{ rotate: 360 }}
+                     animate={isPaused ? {} : { rotate: 360 }}
                      transition={{ duration: 3 + i, repeat: Infinity, ease: "linear" }}
                      className="absolute inset-0 flex items-start justify-center"
                    >
@@ -167,14 +176,22 @@ const PoSOverviewViz: React.FC = () => {
               </div>
            </div>
 
+           {/* Play/Pause Button */}
+           <button 
+             onClick={() => setIsPaused(!isPaused)}
+             className="absolute bottom-6 right-6 p-3 rounded-full bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 text-indigo-600 dark:text-indigo-400 shadow-lg hover:scale-110 active:scale-95 transition-all z-30"
+           >
+              {isPaused ? <Play size={16} fill="currentColor" /> : <Pause size={16} fill="currentColor" />}
+           </button>
+
            <div className="absolute top-6 right-6 flex items-center gap-2">
               <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-[9px] text-gray-400 dark:text-slate-500 uppercase font-black tracking-widest">Epoch synchronization active</span>
+              <span className="text-[9px] text-gray-400 dark:text-slate-500 uppercase font-black tracking-widest">Sync active</span>
            </div>
         </div>
 
         {/* Narrative Description */}
-        <div className="min-h-[100px] max-w-2xl">
+        <div className="min-h-[120px] max-w-2xl">
            <AnimatePresence mode="wait">
               <motion.div
                 key={step}
@@ -208,20 +225,25 @@ const PoSOverviewViz: React.FC = () => {
            </div>
            <p className="text-[10px] text-gray-500 dark:text-slate-500 leading-relaxed text-left font-bold uppercase tracking-tight">
               <span className="text-indigo-600 dark:text-indigo-400 mr-1">Consensus Model:</span>
-              Proof of Stake replaces physical electricity with financial capital. This makes the network 99.9% more energy efficient while maintaining robust economic security.
+              PoS replaces electricity with capital. 99.9% more efficient while maintaining security.
            </p>
         </div>
 
         <div className="flex gap-1.5">
            {phases.map((_, i) => (
-             <motion.div 
+             <button 
                key={i}
-               animate={{ 
-                 width: step === i ? 24 : 8,
-                 backgroundColor: step === i ? '#6366f1' : 'rgba(226, 232, 240, 0.5)'
-               }}
-               className="h-1 rounded-full transition-all duration-500"
-             />
+               onClick={() => handlePhaseClick(i)}
+               className="group relative py-2"
+             >
+               <motion.div 
+                 animate={{ 
+                   width: step === i ? 24 : 8,
+                   backgroundColor: step === i ? '#6366f1' : '#e2e8f0'
+                 }}
+                 className="h-1 rounded-full transition-all duration-500"
+               />
+             </button>
            ))}
         </div>
       </div>
