@@ -9,7 +9,7 @@ const PoSOverviewViz: React.FC = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setStep((s) => (s + 1) % 4);
-    }, 5000);
+    }, 6000);
     return () => clearInterval(timer);
   }, []);
 
